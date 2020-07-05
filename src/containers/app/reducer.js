@@ -28,12 +28,14 @@ export const mainReducer = (state = initialState, action) => {
     }
     case UPDATE_PLAYER_DATA: {
       const data = action.payload.response;
-      // TODO: update no_data to true when user is not playing any songs
-      return state
-        .set("item", data.item)
-        .set("is_playing", data.is_playing)
-        .set("progress_ms", data.progress_ms)
-        .set("no_data", false);
+      // Response is null when user doesn't play anything on spotify.
+      return isNil(data)
+        ? state.set("no_data", true)
+        : state
+            .set("item", data.item)
+            .set("is_playing", data.is_playing)
+            .set("progress_ms", data.progress_ms)
+            .set("no_data", false);
     }
     default:
       return state;

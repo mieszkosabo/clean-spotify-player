@@ -43,7 +43,7 @@ export const Canvas = () => {
   const canvasRef = useRef(null);
   useEffect(() => {
     const canvas = canvasRef.current;
-    ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d"); // dispach to redux
     const img = new Image();
     img.crossOrigin = "Anonimous";
     img.src = item.album.images[0].url;

@@ -3,24 +3,20 @@ import { mergeMap, map, catchError, takeUntil, filter } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
 import { of, interval } from "rxjs";
 import { ofType } from "redux-observable";
-import { prop, isNil } from "rambda";
-import { MAIN_REDUCER } from "./reducer";
+import { isNil } from "rambda";
 import { updateData } from "./actions";
+import { tokenSelector } from "./selectors";
 
 export const playerDataEpic = (action$, state$) => {
-  const token = prop(MAIN_REDUCER)(state$.value).get("token");
-  console.log("token", token);
-  console.log("epic", action$.type);
   return action$.pipe(
     ofType(INIT),
-    filter(() => !isNil(prop(MAIN_REDUCER)(state$.value).get("token"))),
+    filter(() => !isNil(tokenSelector(state$.value))),
     mergeMap(() =>
       ajax({
         url: "https://api.spotify.com/v1/me/player",
         type: "GET",
         headers: {
-          Authorization:
-            "Bearer " + prop(MAIN_REDUCER)(state$.value).get("token")
+          Authorization: "Bearer " + tokenSelector(state$.value)
         }
       }).pipe(
         map(response => updateData(response))
