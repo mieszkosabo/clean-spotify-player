@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { render } from "@testing-library/react";
+import { useSelector } from "react-redux";
+import { itemSelector } from "../app/selectors";
 
 export const Canvas = () => {
+  const item = useSelector(itemSelector);
+
+  // bad code, TODO: put these to redux
   var imgWidth, imgHeight, ctx;
   // helpers
   var getAverageRGB = function(imgData) {
@@ -42,7 +46,7 @@ export const Canvas = () => {
     ctx = canvas.getContext("2d");
     const img = new Image();
     img.crossOrigin = "Anonimous";
-    img.src = "https://i.scdn.co/image/ab67616d0000b273626d2ce1fb80955645d4d787";
+    img.src = item.album.images[0].url;
     img.onload = function() {
       imgWidth = img.width;
       imgHeight = img.height;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./App.css";
-import { Canvas } from "../canvas/canvas";
+import { Canvas } from "../canvas";
 import { authEndpoint, clientId, redirectUri, scopes } from "../../api_config";
 import { tokenSelector, noDataSelector, itemSelector } from "./selectors";
 
@@ -23,7 +23,7 @@ export const App = () => {
           </a>
         )}
         {token && no_data && <a> Play something on spotify first!</a>}
-        {token && !no_data && <a> {item.name} </a>}
+        {token && !no_data && <Canvas />}
       </header>
     </div>
   );

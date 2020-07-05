@@ -17,7 +17,7 @@ const initialState = fromJS({
   },
   is_playing: "Paused",
   progress_ms: 0,
-  no_data: false
+  no_data: true
 });
 
 export const mainReducer = (state = initialState, action) => {
@@ -28,6 +28,7 @@ export const mainReducer = (state = initialState, action) => {
     }
     case UPDATE_PLAYER_DATA: {
       const data = action.payload.response;
+      // TODO: update no_data to true when user is not playing any songs
       return state
         .set("item", data.item)
         .set("is_playing", data.is_playing)
