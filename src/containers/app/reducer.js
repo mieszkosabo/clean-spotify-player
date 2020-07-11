@@ -12,14 +12,10 @@ export const MAIN_REDUCER = "MAIN_REDUCER";
 
 const initialState = fromJS({
   token: null,
-  item: {
-    album: {
-      images: [{ url: "" }]
-    },
-    name: "",
-    artists: [{ name: "" }],
-    duration_ms: 0
-  },
+  album_cover: "",
+  duration_ms: 0,
+  artist: "",
+  song_name: "",
   is_playing: "Paused",
   progress_ms: 0,
   no_data: false,
@@ -38,9 +34,12 @@ export const mainReducer = (state = initialState, action) => {
       return isNil(data)
         ? state.set("no_data", true).set("loading", false)
         : state
-            .set("item", data.item) // tylko potrzebne rzeczy
+            .set("song_name", data.item.name)
+            .set("artist", data.item.artists[0].name)
+            .set("duration_ms", data.item.duration_ms)
             .set("is_playing", data.is_playing)
             .set("progress_ms", data.progress_ms)
+            .set("album_cover", data.item.album.images[0].url)
             .set("no_data", false)
             .set("loading", false);
     }
@@ -53,7 +52,7 @@ export const mainReducer = (state = initialState, action) => {
           .set("loading", true)
           .set("no_data", false);
       }
-      return state;
+      return state; //tood
     }
     default:
       return state;

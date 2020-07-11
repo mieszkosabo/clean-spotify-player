@@ -12,8 +12,12 @@ export const noDataSelector = createSelector(getMainData, state =>
   state.get("no_data")
 );
 
-export const itemSelector = createSelector(getMainData, state =>
-  state.get("item")
+export const songNameSelector = createSelector(getMainData, state =>
+  state.get("song_name")
+);
+
+export const albumCoverSelector = createSelector(getMainData, state =>
+  state.get("album_cover")
 );
 
 export const isPlayingSelector = createSelector(getMainData, state =>
@@ -24,6 +28,14 @@ export const progressSelector = createSelector(getMainData, state =>
   state.get("progress_ms")
 );
 
+export const durationSelector = createSelector(getMainData, state =>
+  state.get("duration_ms")
+);
+
 export const loadingSelector = createSelector(getMainData, state =>
   state.get("loading")
+);
+
+export const artistSelector = createSelector(getMainData, state =>
+  state.get("artist")
 );
