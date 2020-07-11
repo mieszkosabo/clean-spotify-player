@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { pixelize } from "./pixelize";
 import { PIXEL_SIZE } from "./consts";
+import { CanvasWrapper } from "./canvasWrapper";
 
 export const Canvas = ({ imgUrl }) => {
   const canvasRef = useRef(null);
@@ -20,5 +21,5 @@ export const Canvas = ({ imgUrl }) => {
     };
   });
 
-  return <canvas ref={canvasRef} />;
+  return <CanvasWrapper ref={canvasRef} />;
 };
