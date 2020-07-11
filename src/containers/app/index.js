@@ -1,14 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./App.css";
-import { Canvas } from "../canvas";
 import { authEndpoint, clientId, redirectUri, scopes } from "../../api_config";
 import { tokenSelector, noDataSelector, itemSelector } from "./selectors";
+import { CurrentlyPlayingDisplay } from "../currentlyPlayingDisplay";
 
 export const App = () => {
   const token = useSelector(tokenSelector);
   const no_data = useSelector(noDataSelector);
-  const item = useSelector(itemSelector);
   return (
     <div className="App">
       <header className="App-header">
@@ -23,7 +22,7 @@ export const App = () => {
           </a>
         )}
         {token && no_data && <a> Play something on spotify first!</a>}
-        {token && !no_data && <Canvas />}
+        {token && !no_data && <CurrentlyPlayingDisplay />}
       </header>
     </div>
   );

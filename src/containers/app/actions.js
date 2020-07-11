@@ -1,4 +1,4 @@
-import { INIT, UPDATE_PLAYER_DATA } from "./consts";
+import { INIT, UPDATE_PLAYER_DATA, FETCH_DATA } from "./consts";
 
 export const init = () => ({
   type: INIT
@@ -7,4 +7,8 @@ export const init = () => ({
 export const updateData = data => ({
   type: UPDATE_PLAYER_DATA,
   payload: data
+});
+
+export const fetchData = () => ({
+  type: FETCH_DATA
 });
