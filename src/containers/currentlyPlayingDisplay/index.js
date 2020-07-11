@@ -15,7 +15,14 @@ import { SongTitle } from "./components/songTitle";
 import { Artist } from "./components/artist";
 import { Line } from "rc-progress";
 import { useTheme } from "styled-components";
-import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+import styled from "styled-components";
+
+//TODO: constants
+const StyledProgressLine = styled(Line)`
+  width: 70vh;
+  margin-top: 35px;
+  margin-left: calc(30px + 5vh);
+`;
 
 export const CurrentlyPlayingDisplay = () => {
   const albumCover = useSelector(albumCoverSelector);
@@ -31,10 +38,12 @@ export const CurrentlyPlayingDisplay = () => {
       <Row>
         <Col>
           <Canvas imgUrl={albumCover} />
-          <Line
-            percent={(progress / duration) * 100}
+          <StyledProgressLine
+            percent={(progress / duration) * 100} //TODO: update progress only when song changes, otherwise update percent smoothly
             strokeColor={theme.colors.progressFront}
             trailColor={theme.colors.progressBack}
+            strokeWidth={2}
+            trailWidth={2}
           />
         </Col>
         <Col>
