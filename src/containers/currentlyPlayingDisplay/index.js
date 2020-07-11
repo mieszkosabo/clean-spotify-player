@@ -2,7 +2,9 @@ import React, { useEffect, useRef } from "react";
 import { Canvas } from "./components/cavas";
 import { itemSelector } from "../app/selectors";
 import { useSelector } from "react-redux";
-import { Container, Col, Row } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { SongTitle } from "./components/songTitle";
 
 export const CurrentlyPlayingDisplay = () => {

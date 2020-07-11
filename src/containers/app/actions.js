@@ -1,4 +1,10 @@
-import { INIT, UPDATE_PLAYER_DATA, FETCH_DATA } from "./consts";
+import {
+  INIT,
+  UPDATE_PLAYER_DATA,
+  FETCH_DATA,
+  SET_TOKEN,
+  FETCH_DATA_ERROR
+} from "./consts";
 
 export const init = () => ({
   type: INIT
@@ -11,4 +17,14 @@ export const updateData = data => ({
 
 export const fetchData = () => ({
   type: FETCH_DATA
+});
+
+export const setToken = token => ({
+  type: SET_TOKEN,
+  payload: token
+});
+
+export const fetchDataError = error => ({
+  type: FETCH_DATA_ERROR,
+  payload: error
 });

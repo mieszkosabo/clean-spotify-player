@@ -1,10 +1,10 @@
 import { INIT, FETCH_DATA } from "./consts";
-import { mergeMap, map, filter } from "rxjs/operators";
+import { mergeMap, map, filter, catchError } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
-import { interval } from "rxjs";
+import { interval, of } from "rxjs";
 import { ofType } from "redux-observable";
 import { isNil } from "rambda";
-import { updateData, fetchData } from "./actions";
+import { updateData, fetchData, fetchDataError } from "./actions";
 import { tokenSelector } from "./selectors";
 
 export const updateDataEveryIntervalEpic = action$ =>
@@ -30,8 +30,8 @@ export const playerDataEpic = (action$, state$) =>
           Authorization: "Bearer " + tokenSelector(state$.value)
         }
       }).pipe(
-        map(response => updateData(response))
-        //catchError(error => of(fetchWeatherRejected(error)))
+        map(response => updateData(response)),
+        catchError(error => of(fetchDataError(error)))
       )
     )
   );

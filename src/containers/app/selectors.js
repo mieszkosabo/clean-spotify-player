@@ -23,3 +23,7 @@ export const isPlayingSelector = createSelector(getMainData, state =>
 export const progressSelector = createSelector(getMainData, state =>
   state.get("progress_ms")
 );
+
+export const loadingSelector = createSelector(getMainData, state =>
+  state.get("loading")
+);
