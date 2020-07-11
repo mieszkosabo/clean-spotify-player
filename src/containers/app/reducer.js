@@ -32,7 +32,7 @@ export const mainReducer = (state = initialState, action) => {
       return isNil(data)
         ? state.set("no_data", true)
         : state
-            .set("item", data.item)
+            .set("item", data.item) // tylko potrzebne rzeczy
             .set("is_playing", data.is_playing)
             .set("progress_ms", data.progress_ms)
             .set("no_data", false);

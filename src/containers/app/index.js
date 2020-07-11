@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "./App.css";
 import { authEndpoint, clientId, redirectUri, scopes } from "../../api_config";
-import { tokenSelector, noDataSelector, itemSelector } from "./selectors";
+import { tokenSelector, noDataSelector } from "./selectors";
 import { CurrentlyPlayingDisplay } from "../currentlyPlayingDisplay";
 
 export const App = () => {

@@ -1,7 +1,7 @@
 import { INIT, FETCH_DATA } from "./consts";
-import { mergeMap, map, catchError, takeUntil, filter } from "rxjs/operators";
+import { mergeMap, map, filter } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
-import { of, interval } from "rxjs";
+import { interval } from "rxjs";
 import { ofType } from "redux-observable";
 import { isNil } from "rambda";
 import { updateData, fetchData } from "./actions";
@@ -31,8 +31,7 @@ export const playerDataEpic = (action$, state$) =>
         }
       }).pipe(
         map(response => updateData(response))
-        //catchError(error => of(fetchWeatherRejected(error))),
-        //takeUntil(action$.pipe(ofType(WEATHER_READY)))
+        //catchError(error => of(fetchWeatherRejected(error)))
       )
     )
   );
