@@ -1,12 +1,6 @@
 import { fromJS } from "immutable";
-import {
-  INIT,
-  UPDATE_PLAYER_DATA,
-  SET_TOKEN,
-  FETCH_DATA_ERROR
-} from "./consts";
+import { UPDATE_PLAYER_DATA, SET_TOKEN, FETCH_DATA_ERROR } from "./consts";
 import { isNil } from "rambda";
-import { getAuthToken } from "./utils";
 
 export const MAIN_REDUCER = "MAIN_REDUCER";
 
@@ -31,6 +25,7 @@ export const mainReducer = (state = initialState, action) => {
     case UPDATE_PLAYER_DATA: {
       const data = action.payload.response;
       // Response is null when user doesn't play anything on spotify.
+      //TODO: see if data.item can be null
       return isNil(data)
         ? state.set("no_data", true).set("loading", false)
         : state
@@ -45,14 +40,14 @@ export const mainReducer = (state = initialState, action) => {
     }
     case FETCH_DATA_ERROR: {
       const error = action.payload;
-      console.log(error);
+      // session expired
       if (error.status === 401) {
         return state
           .set("token", null)
           .set("loading", true)
           .set("no_data", false);
       }
-      return state; //tood
+      return state; //TODO: other errors
     }
     default:
       return state;

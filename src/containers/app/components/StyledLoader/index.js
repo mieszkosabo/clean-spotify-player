@@ -19,7 +19,7 @@ const LoaderWrapper = ({ className }) => (
 export const StyledLoader = styled(LoaderWrapper)`
   width: 100%;
   position: fixed;
-  top: calc(50vh - ${LOADER_SIZE}px);
+  top: calc(50vh - ${LOADER_SIZE / 2}px);
   svg {
     width: 100%;
   }
