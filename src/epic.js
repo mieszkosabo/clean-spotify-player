@@ -1,10 +1,12 @@
 import { combineEpics } from "redux-observable";
 import {
   playerDataEpic,
-  updateDataEveryIntervalEpic
+  updateDataEveryIntervalEpic,
+  smoothStatusBarEpic
 } from "./containers/app/epic";
 
 export const rootEpic = combineEpics(
   playerDataEpic,
-  updateDataEveryIntervalEpic
+  updateDataEveryIntervalEpic,
+  smoothStatusBarEpic
 );

@@ -31,7 +31,6 @@ export const CurrentlyPlayingDisplay = () => {
   const progress = useSelector(progressSelector);
   const duration = useSelector(durationSelector);
   const theme = useTheme();
-  console.log(progress / duration);
 
   return (
     <Container fluid>

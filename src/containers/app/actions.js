@@ -3,7 +3,8 @@ import {
   UPDATE_PLAYER_DATA,
   FETCH_DATA,
   SET_TOKEN,
-  FETCH_DATA_ERROR
+  FETCH_DATA_ERROR,
+  SMOOTH_PROGRESS
 } from "./consts";
 
 export const init = () => ({
@@ -27,4 +28,9 @@ export const setToken = token => ({
 export const fetchDataError = error => ({
   type: FETCH_DATA_ERROR,
   payload: error
+});
+
+export const progressSmoothly = time => ({
+  type: SMOOTH_PROGRESS,
+  payload: time
 });

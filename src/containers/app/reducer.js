@@ -1,5 +1,11 @@
 import { fromJS } from "immutable";
-import { UPDATE_PLAYER_DATA, SET_TOKEN, FETCH_DATA_ERROR } from "./consts";
+import {
+  UPDATE_PLAYER_DATA,
+  SET_TOKEN,
+  FETCH_DATA_ERROR,
+  PLAY,
+  SMOOTH_PROGRESS
+} from "./consts";
 import { isNil } from "rambda";
 
 export const MAIN_REDUCER = "MAIN_REDUCER";
@@ -40,6 +46,7 @@ export const mainReducer = (state = initialState, action) => {
     }
     case FETCH_DATA_ERROR: {
       const error = action.payload;
+      console.log(error);
       // session expired
       if (error.status === 401) {
         return state
@@ -48,6 +55,10 @@ export const mainReducer = (state = initialState, action) => {
           .set("no_data", false);
       }
       return state; //TODO: other errors
+    }
+    case SMOOTH_PROGRESS: {
+      const currTime = state.get("progress_ms");
+      return state.set("progress_ms", currTime + action.payload);
     }
     default:
       return state;
