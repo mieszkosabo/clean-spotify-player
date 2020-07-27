@@ -3,7 +3,7 @@ import {
   UPDATE_PLAYER_DATA,
   SET_TOKEN,
   FETCH_DATA_ERROR,
-  PLAY,
+  PLAYPAUSE_ERROR,
   SMOOTH_PROGRESS
 } from "./consts";
 import { isNil } from "rambda";
@@ -59,6 +59,10 @@ export const mainReducer = (state = initialState, action) => {
     case SMOOTH_PROGRESS: {
       const currTime = state.get("progress_ms");
       return state.set("progress_ms", currTime + action.payload);
+    }
+    case PLAYPAUSE_ERROR: {
+      console.log(action.payload);
+      return state;
     }
     default:
       return state;

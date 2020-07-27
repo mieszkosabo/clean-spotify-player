@@ -5,9 +5,10 @@ import {
   albumCoverSelector,
   artistSelector,
   progressSelector,
-  durationSelector
+  durationSelector,
+  isPlayingSelector
 } from "../app/selectors";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -16,6 +17,9 @@ import { Artist } from "./components/artist";
 import { Line } from "rc-progress";
 import { useTheme } from "styled-components";
 import styled from "styled-components";
+import { tryPlayPause } from "../app/actions";
+import { PlayPause } from "../controls/components/skip";
+import { Controls } from "../controls";
 
 //TODO: constants
 const StyledProgressLine = styled(Line)`
@@ -30,7 +34,9 @@ export const CurrentlyPlayingDisplay = () => {
   const artist = useSelector(artistSelector);
   const progress = useSelector(progressSelector);
   const duration = useSelector(durationSelector);
+  const is_playing = useSelector(isPlayingSelector);
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   return (
     <Container fluid>
@@ -48,6 +54,7 @@ export const CurrentlyPlayingDisplay = () => {
         <Col>
           <SongTitle title={songName} />
           <Artist name={artist} />
+          <Controls />
         </Col>
       </Row>
     </Container>

@@ -1,9 +1,11 @@
 import {
   INIT,
   FETCH_DATA,
-  PLAY,
+  PLAYPAUSE,
   UPDATE_PLAYER_DATA,
-  PROGRESS_EVERY_MS
+  PROGRESS_EVERY_MS,
+  SKIPBACK,
+  SKIPFORWARD
 } from "./consts";
 import { mergeMap, map, filter, catchError, takeUntil } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
@@ -14,7 +16,9 @@ import {
   updateData,
   fetchData,
   fetchDataError,
-  progressSmoothly
+  progressSmoothly,
+  playPause,
+  playPauseError
 } from "./actions";
 import { tokenSelector, isPlayingSelector } from "./selectors";
 
@@ -31,12 +35,12 @@ export const updateDataEveryIntervalEpic = action$ =>
 
 export const smoothStatusBarEpic = (action$, state$) =>
   action$.pipe(
-    ofType(PLAY, UPDATE_PLAYER_DATA),
+    ofType(UPDATE_PLAYER_DATA),
     filter(() => isPlayingSelector(state$.value)),
     mergeMap(() =>
       interval(PROGRESS_EVERY_MS).pipe(
         map(() => progressSmoothly(PROGRESS_EVERY_MS)),
-        takeUntil(action$.pipe(ofType(PLAY, UPDATE_PLAYER_DATA)))
+        takeUntil(action$.pipe(ofType(UPDATE_PLAYER_DATA)))
       )
     )
   );
@@ -55,6 +59,42 @@ export const playerDataEpic = (action$, state$) =>
       }).pipe(
         map(response => updateData(response)),
         catchError(error => of(fetchDataError(error)))
+      )
+    )
+  );
+
+export const playPauseEpic = (action$, state$) =>
+  action$.pipe(
+    ofType(PLAYPAUSE),
+    mergeMap(action =>
+      ajax({
+        url: `https://api.spotify.com/v1/me/player/${action.payload}`,
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + tokenSelector(state$.value)
+        }
+      }).pipe(
+        map(() => fetchData()),
+        catchError(error => of(playPauseError(error)))
+      )
+    )
+  );
+
+export const skipSongEpic = (action$, state$) =>
+  action$.pipe(
+    ofType(SKIPBACK, SKIPFORWARD),
+    mergeMap(action =>
+      ajax({
+        url: `https://api.spotify.com/v1/me/player/${
+          action.type === SKIPBACK ? "previous" : "next"
+        }`,
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + tokenSelector(state$.value)
+        }
+      }).pipe(
+        map(() => fetchData()),
+        catchError(error => of(playPauseError(error))) //FIXME: find better name
       )
     )
   );
