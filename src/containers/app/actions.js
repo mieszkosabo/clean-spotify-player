@@ -6,7 +6,6 @@ import {
   FETCH_DATA_ERROR,
   SMOOTH_PROGRESS,
   PLAYPAUSE,
-  TRY_PLAYPAUSE,
   PLAYPAUSE_ERROR,
   SKIPBACK,
   SKIPFORWARD
@@ -40,12 +39,8 @@ export const progressSmoothly = time => ({
   payload: time
 });
 
-export const playPause = () => ({
-  type: PLAYPAUSE
-});
-
-export const tryPlayPause = action => ({
-  type: TRY_PLAYPAUSE,
+export const playPause = action => ({
+  type: PLAYPAUSE,
   payload: action
 });
 
@@ -54,10 +49,10 @@ export const playPauseError = error => ({
   payload: error
 });
 
-export const trySkipBack = () => ({
+export const skipBack = () => ({
   type: SKIPBACK
 });
 
-export const trySkipForward = () => ({
+export const skipForward = () => ({
   type: SKIPFORWARD
 });

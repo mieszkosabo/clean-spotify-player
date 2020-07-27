@@ -4,7 +4,6 @@ export const FETCH_DATA = "FETCH_DATA";
 export const SET_TOKEN = "SET_TOKEN";
 export const FETCH_DATA_ERROR = "FETCH_DATA_ERROR";
 export const PLAYPAUSE = "PLAYPAUSE";
-export const TRY_PLAYPAUSE = "TRY_PLAYPAUSE";
 export const SMOOTH_PROGRESS = "SMOOTH_PROGRESS";
 export const PROGRESS_EVERY_MS = 200;
 export const PLAYPAUSE_ERROR = "PLAYPAUSE_ERROR";
