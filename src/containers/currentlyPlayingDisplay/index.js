@@ -21,8 +21,9 @@ import { Controls } from "../controls";
 //TODO: constants
 const StyledProgressLine = styled(Line)`
   width: 70vh;
-  margin-top: 35px;
+  margin-top: 12vh;
   margin-left: calc(30px + 5vh);
+  height: 9%;
 `;
 
 const ControlsRow = styled(Row)`
@@ -37,6 +38,14 @@ const TextRow = styled(Row)`
   height: 50vh;
 `;
 
+const CanvasRow = styled(Row)`
+  height: 80vh;
+`;
+
+const ProgressBarRow = styled(Row)`
+  height: 20vh;
+`;
+
 export const CurrentlyPlayingDisplay = () => {
   const albumCover = useSelector(albumCoverSelector);
   const songName = useSelector(songNameSelector);
@@ -48,17 +57,21 @@ export const CurrentlyPlayingDisplay = () => {
   return (
     <Container fluid>
       <Row>
-        <Col>
-          <Canvas imgUrl={albumCover} />
-          <StyledProgressLine
-            percent={(progress / duration) * 100}
-            strokeColor={theme.colors.progressFront}
-            trailColor={theme.colors.progressBack}
-            strokeWidth={2}
-            trailWidth={2}
-          />
+        <Col md={6} xs={12}>
+          <CanvasRow>
+            <Canvas imgUrl={albumCover} />
+          </CanvasRow>
+          <ProgressBarRow>
+            <StyledProgressLine
+              percent={(progress / duration) * 100}
+              strokeColor={theme.colors.progressFront}
+              trailColor={theme.colors.progressBack}
+              strokeWidth={2}
+              trailWidth={2}
+            />
+          </ProgressBarRow>
         </Col>
-        <Col>
+        <Col md={6} xs={12}>
           <TextRow>
             <SongTitle title={songName} />
             <Artist name={artist} />
