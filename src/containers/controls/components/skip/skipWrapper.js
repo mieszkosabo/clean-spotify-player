@@ -7,4 +7,7 @@ export const SkipWrapper = styled.img`
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
+  &:active {
+    transform: scale(0.9);
+  }
 `;

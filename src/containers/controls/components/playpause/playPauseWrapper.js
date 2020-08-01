@@ -7,4 +7,7 @@ export const PlayPauseWrapper = styled.img`
   margin-top: 10px;
   margin-left: 20px;
   margin-right: 20px;
+  &:active {
+    transform: scale(0.9);
+  }
 `;
