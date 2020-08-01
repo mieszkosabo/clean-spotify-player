@@ -17,7 +17,7 @@ export const Canvas = ({ imgUrl }) => {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
-      pixelize(PIXEL_SIZE, imgWidth, imgHeight, ctx);
+      pixelize(PIXEL_SIZE / 2, imgWidth, imgHeight, ctx);
     };
   });
 

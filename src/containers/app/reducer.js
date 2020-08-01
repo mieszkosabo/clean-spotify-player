@@ -30,6 +30,7 @@ export const mainReducer = (state = initialState, action) => {
     }
     case UPDATE_PLAYER_DATA: {
       const data = action.payload.response;
+      console.log(data);
       // Response is null when user doesn't play anything on spotify.
       return isNil(data)
         ? state.set("no_data", true).set("loading", false)
@@ -39,10 +40,11 @@ export const mainReducer = (state = initialState, action) => {
             .set("duration_ms", data.item.duration_ms)
             .set("is_playing", data.is_playing)
             .set("progress_ms", data.progress_ms)
-            .set("album_cover", data.item.album.images[0].url)
+            .set("album_cover", data.item.album.images[1].url)
             .set("no_data", false)
             .set("loading", false);
     }
+    case PLAYPAUSE_ERROR:
     case FETCH_DATA_ERROR: {
       const error = action.payload;
       console.log(error);
@@ -58,10 +60,6 @@ export const mainReducer = (state = initialState, action) => {
     case SMOOTH_PROGRESS: {
       const currTime = state.get("progress_ms");
       return state.set("progress_ms", currTime + action.payload);
-    }
-    case PLAYPAUSE_ERROR: {
-      console.log(action.payload);
-      return state;
     }
     default:
       return state;
