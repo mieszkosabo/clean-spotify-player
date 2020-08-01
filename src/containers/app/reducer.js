@@ -3,7 +3,7 @@ import {
   UPDATE_PLAYER_DATA,
   SET_TOKEN,
   FETCH_DATA_ERROR,
-  PLAY,
+  PLAYPAUSE_ERROR,
   SMOOTH_PROGRESS
 } from "./consts";
 import { isNil } from "rambda";
@@ -31,7 +31,6 @@ export const mainReducer = (state = initialState, action) => {
     case UPDATE_PLAYER_DATA: {
       const data = action.payload.response;
       // Response is null when user doesn't play anything on spotify.
-      //TODO: see if data.item can be null
       return isNil(data)
         ? state.set("no_data", true).set("loading", false)
         : state
@@ -59,6 +58,10 @@ export const mainReducer = (state = initialState, action) => {
     case SMOOTH_PROGRESS: {
       const currTime = state.get("progress_ms");
       return state.set("progress_ms", currTime + action.payload);
+    }
+    case PLAYPAUSE_ERROR: {
+      console.log(action.payload);
+      return state;
     }
     default:
       return state;

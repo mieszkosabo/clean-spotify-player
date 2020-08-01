@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { theme } from "styled-tools";
 
-// todo grid/flexbox
 export const GlobalStyle = createGlobalStyle`
   html,
   body,

@@ -16,12 +16,44 @@ import { Artist } from "./components/artist";
 import { Line } from "rc-progress";
 import { useTheme } from "styled-components";
 import styled from "styled-components";
+import { Controls } from "../controls";
+import { theme } from "styled-tools";
 
-//TODO: constants
 const StyledProgressLine = styled(Line)`
-  width: 70vh;
-  margin-top: 35px;
-  margin-left: calc(30px + 5vh);
+  width: min(70vh, 80vw);
+  margin-top: 12vh;
+  margin-left: auto;
+  margin-right: auto;
+  height: min(2vh, 2vw);
+  @media (max-width: ${theme("dims.minLandscapeWidthPx")}px) {
+    margin-top: min(6vh, 6vw);
+  }
+`;
+
+const ControlsRow = styled(Row)`
+  text-align: "center";
+  align-items: center;
+  justify-content: center;
+  margin-top: min(7vh, 7vw);
+`;
+
+const TextRow = styled(Row)`
+  justify-content: center;
+  @media (min-width: ${theme("dims.minLandscapeWidthPx")}px) {
+    height: 50vh;
+  }
+`;
+
+const CanvasRow = styled(Row)`
+  @media (min-width: ${theme("dims.minLandscapeWidthPx")}px) {
+    height: 80vh;
+  }
+`;
+
+const ProgressBarRow = styled(Row)`
+  @media (min-width: ${theme("dims.minLandscapeWidthPx")}px) {
+    height: 20vh;
+  }
 `;
 
 export const CurrentlyPlayingDisplay = () => {
@@ -35,19 +67,28 @@ export const CurrentlyPlayingDisplay = () => {
   return (
     <Container fluid>
       <Row>
-        <Col>
-          <Canvas imgUrl={albumCover} />
-          <StyledProgressLine
-            percent={(progress / duration) * 100} //TODO: update progress only when song changes, otherwise update percent smoothly
-            strokeColor={theme.colors.progressFront}
-            trailColor={theme.colors.progressBack}
-            strokeWidth={2}
-            trailWidth={2}
-          />
+        <Col md={6} xs={12} sm={6}>
+          <CanvasRow>
+            <Canvas imgUrl={albumCover} />
+          </CanvasRow>
+          <ProgressBarRow>
+            <StyledProgressLine
+              percent={(progress / duration) * 100}
+              strokeColor={theme.colors.progressFront}
+              trailColor={theme.colors.progressBack}
+              strokeWidth={2}
+              trailWidth={2}
+            />
+          </ProgressBarRow>
         </Col>
-        <Col>
-          <SongTitle title={songName} />
-          <Artist name={artist} />
+        <Col md={6} xs={12} sm={6}>
+          <TextRow>
+            <SongTitle title={songName} />
+            <Artist name={artist} />
+          </TextRow>
+          <ControlsRow>
+            <Controls />
+          </ControlsRow>
         </Col>
       </Row>
     </Container>
