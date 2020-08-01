@@ -17,33 +17,43 @@ import { Line } from "rc-progress";
 import { useTheme } from "styled-components";
 import styled from "styled-components";
 import { Controls } from "../controls";
+import { theme } from "styled-tools";
 
-//TODO: constants
 const StyledProgressLine = styled(Line)`
-  width: 70vh;
+  width: min(70vh, 80vw);
   margin-top: 12vh;
-  margin-left: calc(30px + 5vh);
-  height: 9%;
+  margin-left: auto;
+  margin-right: auto;
+  height: min(2vh, 2vw);
+  @media (max-width: ${theme("dims.minLandscapeWidthPx")}px) {
+    margin-top: min(6vh, 6vw);
+  }
 `;
 
 const ControlsRow = styled(Row)`
   text-align: "center";
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  margin-top: min(7vh, 7vw);
 `;
 
 const TextRow = styled(Row)`
   justify-content: center;
-  height: 50vh;
+  @media (min-width: ${theme("dims.minLandscapeWidthPx")}px) {
+    height: 50vh;
+  }
 `;
 
 const CanvasRow = styled(Row)`
-  height: 80vh;
+  @media (min-width: ${theme("dims.minLandscapeWidthPx")}px) {
+    height: 80vh;
+  }
 `;
 
 const ProgressBarRow = styled(Row)`
-  height: 20vh;
+  @media (min-width: ${theme("dims.minLandscapeWidthPx")}px) {
+    height: 20vh;
+  }
 `;
 
 export const CurrentlyPlayingDisplay = () => {
@@ -57,7 +67,7 @@ export const CurrentlyPlayingDisplay = () => {
   return (
     <Container fluid>
       <Row>
-        <Col md={6} xs={12}>
+        <Col md={6} xs={12} sm={6}>
           <CanvasRow>
             <Canvas imgUrl={albumCover} />
           </CanvasRow>
@@ -71,7 +81,7 @@ export const CurrentlyPlayingDisplay = () => {
             />
           </ProgressBarRow>
         </Col>
-        <Col md={6} xs={12}>
+        <Col md={6} xs={12} sm={6}>
           <TextRow>
             <SongTitle title={songName} />
             <Artist name={artist} />

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const SkipWrapper = styled.img`
-  height: 15vh;
-  width: 15vh;
+  height: min(15vh, 15vw);
+  width: min(15vh, 15vw);
 
   margin-top: 10px;
   margin-left: auto;

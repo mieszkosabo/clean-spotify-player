@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const PlayPauseWrapper = styled.img`
-  height: 20vh;
-  width: 20vh;
+  height: min(25vh, 25vw);
+  width: min(25vh, 25vw);
 
   margin-top: 10px;
   margin-left: 20px;

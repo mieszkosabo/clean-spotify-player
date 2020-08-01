@@ -31,7 +31,6 @@ export const mainReducer = (state = initialState, action) => {
     case UPDATE_PLAYER_DATA: {
       const data = action.payload.response;
       // Response is null when user doesn't play anything on spotify.
-      //TODO: see if data.item can be null
       return isNil(data)
         ? state.set("no_data", true).set("loading", false)
         : state

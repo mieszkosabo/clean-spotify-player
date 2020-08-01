@@ -6,11 +6,11 @@ import { theme } from "styled-tools";
 // const adjustFontSize = len => `7vw`;
 
 export const TitleWrapper = styled.div`
-  margin-top: 50px;
+  margin-top: min(10vh, 10vw);
   color: ${theme("colors.mainColor")};
   font-family: ${theme("fonts.bold.fontFamily")};
   font-weight: ${theme("fonts.bold.fontWeight")};
   width: 100%;
-  font-size: calc(100% + 4vh);
+  font-size: min(7vh, 7vw);
   text-align: center;
 `;

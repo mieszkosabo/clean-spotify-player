@@ -6,6 +6,6 @@ export const ArtistWrapper = styled.div`
   font-family: ${theme("fonts.regular.fontFamily")};
   font-weight: ${theme("fonts.regular.fontWeight")};
   width: 100%;
-  font-size: calc(100% + 4vh);
+  font-size: min(7vh, 7vw);
   text-align: center;
 `;
