@@ -39,7 +39,7 @@ export const mainReducer = (state = initialState, action) => {
             .set("duration_ms", data.item.duration_ms)
             .set("is_playing", data.is_playing)
             .set("progress_ms", data.progress_ms)
-            .set("album_cover", data.item.album.images[1].url)
+            .set("album_cover", data.item.album.images[0].url)
             .set("no_data", false)
             .set("loading", false);
     }

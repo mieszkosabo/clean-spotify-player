@@ -3,6 +3,8 @@ import { pixelize } from "./pixelize";
 import { PIXEL_SIZE } from "./consts";
 import { CanvasWrapper } from "./canvasWrapper";
 
+export const COVER_SIZE = 860;
+
 export const Canvas = ({ imgUrl }) => {
   const canvasRef = useRef(null);
   useEffect(() => {
@@ -14,10 +16,11 @@ export const Canvas = ({ imgUrl }) => {
     img.onload = () => {
       const imgWidth = img.width;
       const imgHeight = img.height;
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-      pixelize(PIXEL_SIZE, imgWidth, imgHeight, ctx);
+      canvas.width = COVER_SIZE;
+      canvas.height = COVER_SIZE;
+      console.log(img.width);
+      ctx.drawImage(img, 0, 0, COVER_SIZE, COVER_SIZE);
+      //pixelize(PIXEL_SIZE, imgWidth, imgHeight, ctx);
     };
   }, [imgUrl]);
 
