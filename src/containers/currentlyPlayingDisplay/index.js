@@ -1,5 +1,5 @@
 import React from "react";
-import { Canvas, COVER_SIZE } from "./components/cavas";
+import { Canvas } from "./components/cavas";
 import {
   songNameSelector,
   albumCoverSelector,
@@ -16,6 +16,7 @@ import styled from "styled-components";
 import { theme, prop } from "styled-tools";
 import { usePalette } from "react-palette";
 import { defaultTo } from "rambda";
+import { COVER_SIZE } from "./components/cavas/consts";
 
 const StyledProgressLine = styled(Line)`
   width: ${COVER_SIZE - 180}px;
