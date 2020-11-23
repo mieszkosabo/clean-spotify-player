@@ -1,11 +1,8 @@
 import {
   INIT,
   FETCH_DATA,
-  PLAYPAUSE,
   UPDATE_PLAYER_DATA,
   PROGRESS_EVERY_MS,
-  SKIPBACK,
-  SKIPFORWARD
 } from "./consts";
 import { mergeMap, map, filter, catchError, takeUntil } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
@@ -17,8 +14,6 @@ import {
   fetchData,
   fetchDataError,
   progressSmoothly,
-  playPause,
-  playPauseError
 } from "./actions";
 import { tokenSelector, isPlayingSelector } from "./selectors";
 
@@ -59,42 +54,6 @@ export const playerDataEpic = (action$, state$) =>
       }).pipe(
         map(response => updateData(response)),
         catchError(error => of(fetchDataError(error)))
-      )
-    )
-  );
-
-export const playPauseEpic = (action$, state$) =>
-  action$.pipe(
-    ofType(PLAYPAUSE),
-    mergeMap(action =>
-      ajax({
-        url: `https://api.spotify.com/v1/me/player/${action.payload}`,
-        method: "PUT",
-        headers: {
-          Authorization: "Bearer " + tokenSelector(state$.value)
-        }
-      }).pipe(
-        map(() => fetchData()),
-        catchError(error => of(playPauseError(error)))
-      )
-    )
-  );
-
-export const skipSongEpic = (action$, state$) =>
-  action$.pipe(
-    ofType(SKIPBACK, SKIPFORWARD),
-    mergeMap(action =>
-      ajax({
-        url: `https://api.spotify.com/v1/me/player/${
-          action.type === SKIPBACK ? "previous" : "next"
-        }`,
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + tokenSelector(state$.value)
-        }
-      }).pipe(
-        map(() => fetchData()),
-        catchError(error => of(playPauseError(error))) //FIXME: find better name
       )
     )
   );

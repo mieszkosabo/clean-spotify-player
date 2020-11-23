@@ -43,7 +43,6 @@ export const mainReducer = (state = initialState, action) => {
             .set("no_data", false)
             .set("loading", false);
     }
-    case PLAYPAUSE_ERROR:
     case FETCH_DATA_ERROR: {
       const error = action.payload;
       console.log(error);
@@ -54,7 +53,7 @@ export const mainReducer = (state = initialState, action) => {
           .set("loading", true)
           .set("no_data", false);
       }
-      return state; //TODO: other errors
+      return state;
     }
     case SMOOTH_PROGRESS: {
       const currTime = state.get("progress_ms");

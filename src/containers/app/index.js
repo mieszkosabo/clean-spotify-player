@@ -21,7 +21,7 @@ export const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setToken(Cookies.get("spotifyAuthToken")));
-  }, [Cookies.get("spotifyAuthToken")]);
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>

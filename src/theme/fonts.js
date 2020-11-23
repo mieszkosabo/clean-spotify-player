@@ -1,12 +1,10 @@
 export const fonts = {
-  bold: {
+  title: {
     fontFamily: "Montserrat, sans-serif",
-    fontWeight: "700",
-    fontStyle: "normal"
+    fontWeight: "700"
   },
-  regular: {
+  artist: {
     fontFamily: "Montserrat, sans-serif",
-    fontWeight: "400",
-    fontStyle: "normal"
+    fontWeight: "400"
   }
 };
