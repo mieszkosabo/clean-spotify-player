@@ -12,7 +12,7 @@ import { SongTitle } from "./components/songTitle";
 import { Artist } from "./components/artist";
 import { useTheme } from "styled-components";
 import { usePalette } from "react-palette";
-import { defaultTo } from "rambda";
+import { defaultTo } from "ramda";
 import { ProgressLine } from "./components/ProgressLine";
 import { RightPart } from "./components/layout/RightPart";
 import { LeftPart } from "./components/layout/LeftPart";

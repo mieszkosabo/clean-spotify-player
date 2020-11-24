@@ -11,7 +11,7 @@ import { mergeMap, map, filter, catchError, takeUntil, switchMap } from "rxjs/op
 import { ajax } from "rxjs/ajax";
 import { interval, of, from } from "rxjs";
 import { ofType, combineEpics } from "redux-observable";
-import { isNil } from "rambda";
+import { isNil } from "ramda";
 import {
   updateData,
   fetchData,

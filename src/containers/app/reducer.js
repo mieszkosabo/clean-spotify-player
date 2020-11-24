@@ -6,7 +6,7 @@ import {
   SET_REFRESH_TOKEN,
   SET_ACCESS_TOKEN
 } from "./consts";
-import { isNil } from "rambda";
+import { isNil } from "ramda";
 
 export const MAIN_REDUCER = "MAIN_REDUCER";
 

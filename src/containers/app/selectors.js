@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { prop } from "rambda";
+import { prop } from "ramda";
 import { MAIN_REDUCER } from "./reducer";
 
 const getMainData = prop(MAIN_REDUCER);
