@@ -1,17 +1,18 @@
 import { fromJS } from "immutable";
 import {
   UPDATE_PLAYER_DATA,
-  SET_TOKEN,
   FETCH_DATA_ERROR,
-  PLAYPAUSE_ERROR,
-  SMOOTH_PROGRESS
+  SMOOTH_PROGRESS,
+  SET_REFRESH_TOKEN,
+  SET_ACCESS_TOKEN
 } from "./consts";
-import { isNil } from "rambda";
+import { isNil } from "ramda";
 
 export const MAIN_REDUCER = "MAIN_REDUCER";
 
 const initialState = fromJS({
-  token: null,
+  accessToken: null,
+  refreshToken: null,
   album_cover: "",
   duration_ms: 0,
   artist: "",
@@ -24,14 +25,21 @@ const initialState = fromJS({
 
 export const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_TOKEN: {
-      const token = action.payload;
-      return isNil(token) ? state : state.set("token", token);
+    case SET_ACCESS_TOKEN: {
+      const { accessToken } = action;
+      return isNil(accessToken)
+      ? state
+      : state.set('accessToken', accessToken);
+    }
+    case SET_REFRESH_TOKEN: {
+      const { refreshToken } = action;
+      return isNil(refreshToken)
+        ? state
+        : state.set('refreshToken', refreshToken);
     }
     case UPDATE_PLAYER_DATA: {
       const data = action.payload.response;
-      // Response is null when user doesn't play anything on spotify.
-      return isNil(data.item)
+      return isNil(data) || isNil(data.item)
         ? state.set("no_data", true).set("loading", false)
         : state
             .set("song_name", data.item.name)

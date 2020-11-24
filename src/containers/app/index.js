@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { clientId, redirectUri, scopes } from "../../api_config";
 import { tokenSelector, noDataSelector, loadingSelector } from "./selectors";
 import { CurrentlyPlayingDisplay } from "../currentlyPlayingDisplay";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../../theme/globalStyles";
 import { theme } from "../../theme";
-import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { setToken } from "./actions";
+import { setAccessToken, setRefreshToken } from "./actions";
 import { StyledLoader } from "./components/StyledLoader";
-import { StyledSpotifyAuth } from "./components/StyledSpotifyAuth";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { getTokens } from "./utils";
+import { isNil } from "ramda";
+import { FullWrapper } from "./components/FullWrapper";
+import { LoginLink } from "./components/StyledLink";
 
 export const App = () => {
   const token = useSelector(tokenSelector);
@@ -20,7 +19,13 @@ export const App = () => {
   const loading = useSelector(loadingSelector);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setToken(Cookies.get("spotifyAuthToken")));
+    const { accessToken, refreshToken } = getTokens();
+    if (!isNil(accessToken)) {
+      dispatch(setAccessToken(accessToken));
+    }
+    if (!isNil(refreshToken)) {
+      dispatch(setRefreshToken(refreshToken));
+    }
   }, [dispatch]);
 
   return (
@@ -29,18 +34,12 @@ export const App = () => {
       <div className="App">
         <header className="App-header">
           {!token && (
-            <Row>
-              <Col>
-                <StyledSpotifyAuth
-                  redirectUri={redirectUri}
-                  clientId={clientId}
-                  scopes={scopes}
-                />
-              </Col>
-            </Row>
+            <FullWrapper>
+            <LoginLink href="http://localhost:4000/login"> Log in with Spotify </LoginLink>
+            </FullWrapper>
           )}
           {token && no_data && !loading && (
-            <a> Play something on spotify first!</a>
+            <LoginLink> Play something! </LoginLink>
           )}
           {token && loading && <StyledLoader />}
           {token && !no_data && !loading && <CurrentlyPlayingDisplay />}
@@ -49,3 +48,4 @@ export const App = () => {
     </ThemeProvider>
   );
 };
+
