@@ -12,12 +12,15 @@ import { getTokens } from "./utils";
 import { isNil } from "ramda";
 import { FullWrapper } from "./components/FullWrapper";
 import { LoginLink } from "./components/StyledLink";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 export const App = () => {
   const token = useSelector(tokenSelector);
   const no_data = useSelector(noDataSelector);
   const loading = useSelector(loadingSelector);
   const dispatch = useDispatch();
+  const handle = useFullScreenHandle();
+
   useEffect(() => {
     const { accessToken, refreshToken } = getTokens();
     if (!isNil(accessToken)) {
@@ -26,26 +29,29 @@ export const App = () => {
     if (!isNil(refreshToken)) {
       dispatch(setRefreshToken(refreshToken));
     }
-  }, [dispatch]);
+  }, [dispatch, handle, token]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <div className="App">
-        <header className="App-header">
-          {!token && (
-            <FullWrapper>
-            <LoginLink href="http://localhost:4000/login"> Log in with Spotify </LoginLink>
-            </FullWrapper>
-          )}
-          {token && no_data && !loading && (
-            <LoginLink> Play something! </LoginLink>
-          )}
-          {token && loading && <StyledLoader />}
-          {token && !no_data && !loading && <CurrentlyPlayingDisplay />}
-        </header>
-      </div>
-    </ThemeProvider>
+    <FullScreen handle={handle}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <div className="App">
+          <header className="App-header">
+            {!token && (
+              <FullWrapper>
+              <LoginLink href="http://localhost:4000/login"> Log in with Spotify </LoginLink>
+              </FullWrapper>
+            )}
+            {token && no_data && !loading && (
+              <LoginLink> Play something! </LoginLink>
+            )}
+            {token && loading && <StyledLoader />}
+            {!handle.active && <button onClick={handle.enter}>Click to go fullscreen!</button>}
+            {token && !no_data && !loading && <CurrentlyPlayingDisplay />}
+          </header>
+        </div>
+      </ThemeProvider>
+    </FullScreen>
   );
 };
 
