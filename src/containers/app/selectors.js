@@ -5,7 +5,11 @@ import { MAIN_REDUCER } from "./reducer";
 const getMainData = prop(MAIN_REDUCER);
 
 export const tokenSelector = createSelector(getMainData, state =>
-  state.get("token")
+  state.get("accessToken")
+);
+
+export const refreshTokenSelector = createSelector(getMainData, state =>
+  state.get("refreshToken")
 );
 
 export const noDataSelector = createSelector(getMainData, state =>

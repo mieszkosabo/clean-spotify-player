@@ -1,7 +1,10 @@
 export const INIT = "INIT";
 export const UPDATE_PLAYER_DATA = "UPDATE_PLAYER_DATA";
 export const FETCH_DATA = "FETCH_DATA";
-export const SET_TOKEN = "SET_TOKEN";
+export const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
+export const SET_REFRESH_TOKEN = "SET_REFRESH_TOKEN";
 export const FETCH_DATA_ERROR = "FETCH_DATA_ERROR";
 export const SMOOTH_PROGRESS = "SMOOTH_PROGRESS";
 export const PROGRESS_EVERY_MS = 200;
+export const REFRESH_TOKEN = 'REFRESH_TOKEN';
+export const REFRESH_INTERVAL = 1000 * 60 * 60; // 1 hour

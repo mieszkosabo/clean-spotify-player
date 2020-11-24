@@ -2,9 +2,11 @@ import {
   INIT,
   UPDATE_PLAYER_DATA,
   FETCH_DATA,
-  SET_TOKEN,
   FETCH_DATA_ERROR,
-  SMOOTH_PROGRESS
+  SMOOTH_PROGRESS,
+  SET_ACCESS_TOKEN,
+  SET_REFRESH_TOKEN,
+  REFRESH_TOKEN
 } from "./consts";
 
 export const init = () => ({
@@ -20,10 +22,15 @@ export const fetchData = () => ({
   type: FETCH_DATA
 });
 
-export const setToken = token => ({
-  type: SET_TOKEN,
-  payload: token
-});
+export const setAccessToken = (accessToken) => ({
+  type: SET_ACCESS_TOKEN,
+  accessToken
+})
+
+export const setRefreshToken = (refreshToken) => ({
+  type: SET_REFRESH_TOKEN,
+  refreshToken
+})
 
 export const fetchDataError = error => ({
   type: FETCH_DATA_ERROR,
@@ -34,3 +41,7 @@ export const progressSmoothly = time => ({
   type: SMOOTH_PROGRESS,
   payload: time
 });
+
+export const refreshTokenAction = () => ({
+  type: REFRESH_TOKEN
+})
