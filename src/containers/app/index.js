@@ -22,14 +22,16 @@ export const App = () => {
   const handle = useFullScreenHandle();
 
   useEffect(() => {
-    const { accessToken, refreshToken } = getTokens();
-    if (!isNil(accessToken)) {
-      dispatch(setAccessToken(accessToken));
-    }
-    if (!isNil(refreshToken)) {
-      dispatch(setRefreshToken(refreshToken));
-    }
-  }, [dispatch, handle, token]);
+    if (isNil(token)) {
+      const { accessToken, refreshToken } = getTokens();
+      if (!isNil(accessToken)) {
+        dispatch(setAccessToken(accessToken));
+      }
+      if (!isNil(refreshToken)) {
+        dispatch(setRefreshToken(refreshToken));
+      }
+  }
+  }, [dispatch, token]);
 
   return (
     <FullScreen handle={handle}>

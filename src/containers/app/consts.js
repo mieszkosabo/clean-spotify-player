@@ -7,4 +7,4 @@ export const FETCH_DATA_ERROR = "FETCH_DATA_ERROR";
 export const SMOOTH_PROGRESS = "SMOOTH_PROGRESS";
 export const PROGRESS_EVERY_MS = 200;
 export const REFRESH_TOKEN = 'REFRESH_TOKEN';
-export const REFRESH_INTERVAL = 1000 * 60 * 60; // 1 hour
+export const REFRESH_INTERVAL = 1000 * 60 * 30; // 30 mins

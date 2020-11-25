@@ -7,7 +7,7 @@ import {
   REFRESH_TOKEN,
   REFRESH_INTERVAL,
 } from "./consts";
-import { mergeMap, map, filter, catchError, takeUntil, switchMap } from "rxjs/operators";
+import { mergeMap, map, filter, catchError, takeUntil, switchMap, tap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
 import { interval, of, from } from "rxjs";
 import { ofType, combineEpics } from "redux-observable";
@@ -88,6 +88,8 @@ action$.pipe(
       const { access_token, refresh_token } = data.data;
       return ({access_token, refresh_token});
     }),
+    tap(console.log),
+    catchError((error) => of(({type: error}))),
     mergeMap(({access_token, refresh_token}) => [setAccessToken(access_token), setRefreshToken(refresh_token)])
   ))
 );
@@ -96,6 +98,6 @@ export const mainEpics = combineEpics(
   refreshTokenEpic,
   initRefreshTokenEpic,
   playerDataEpic,
-  smoothStatusBarEpic,
+  //smoothStatusBarEpic,
   updateDataEveryIntervalEpic
 )
