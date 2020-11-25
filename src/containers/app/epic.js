@@ -98,6 +98,6 @@ export const mainEpics = combineEpics(
   refreshTokenEpic,
   initRefreshTokenEpic,
   playerDataEpic,
-  //smoothStatusBarEpic,
+  smoothStatusBarEpic,
   updateDataEveryIntervalEpic
 )
