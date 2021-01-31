@@ -4,7 +4,7 @@ const delimiter = '__________';
 
 export const getTokens = () => {
   const url = window.location.href;
-  const tokens = url.split('localhost:3000/')[1];
+  const tokens = url.split('https://clean-spotify-player.hostman.site/')[1];
   if (isEmpty(tokens)) {
     return ({
       accessToken: null,
