@@ -1,5 +1,5 @@
 # clean spotify player
-(screens/crushing.png)
+![](screens/crushing.png)
 A simple app that displays basic info about your currently playing music on Spotify.
 You can use it by simply visiting this page:
 <https://clean-spotify-player.hostman.site>
@@ -24,7 +24,7 @@ You can use it by simply visiting this page:
 7. Run server  with ```node app.js```.
 
 ### screenshots
-(screens/super_slow.png)
-(screens/my_boy.png)
-(screens/diplomats_son.png)
-(screens/mobius_streak.png)
+![](screens/super_slow.png)
+![](screens/my_boy.png)
+![](screens/diplomats_son.png)
+![](screens/mobius_streak.png)
