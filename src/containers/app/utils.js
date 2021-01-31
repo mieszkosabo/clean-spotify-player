@@ -1,10 +1,11 @@
 
 import { isEmpty } from 'ramda';
+import { CONFIG } from '../../config';
 const delimiter = '__________';
 
 export const getTokens = () => {
   const url = window.location.href;
-  const tokens = url.split('https://clean-spotify-player.hostman.site/')[1];
+  const tokens = url.split(`${CONFIG.FRONTEND_URL}/`)[1];
   if (isEmpty(tokens)) {
     return ({
       accessToken: null,

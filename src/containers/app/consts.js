@@ -8,4 +8,3 @@ export const SMOOTH_PROGRESS = "SMOOTH_PROGRESS";
 export const PROGRESS_EVERY_MS = 200;
 export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 export const REFRESH_INTERVAL = 1000 * 60 * 30; // 30 mins
-export const SERVER_URL = 'https://still-lake-17848.herokuapp.com';

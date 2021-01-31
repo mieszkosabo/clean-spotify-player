@@ -15,6 +15,7 @@ import { LoginLink } from "./components/StyledLink";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { FullscreenButton } from "./components/FullscreenButton/FullscreenButton";
 import { SERVER_URL } from "./consts";
+import { CONFIG } from "../../config";
 
 export const App = () => {
   const token = useSelector(tokenSelector);
@@ -43,7 +44,7 @@ export const App = () => {
           <header className="App-header">
             {!token && (
               <FullWrapper>
-              <LoginLink href={`${SERVER_URL}/login`}> Log in with Spotify </LoginLink>
+              <LoginLink href={`${CONFIG.BACKEND_URL}/login`}> Log in with Spotify </LoginLink>
               </FullWrapper>
             )}
             {token && no_data && !loading && (
