@@ -6,6 +6,7 @@ import {
   SET_REFRESH_TOKEN,
   REFRESH_TOKEN,
   REFRESH_INTERVAL,
+  SERVER_URL,
 } from "./consts";
 import { mergeMap, map, filter, catchError, takeUntil, switchMap, tap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
@@ -30,7 +31,6 @@ const updateDataEveryIntervalEpic = action$ =>
     mergeMap(() =>
       interval(5000).pipe(
         map(() => fetchData())
-        //takeUntil(action$.pipe(ofType()))
       )
     )
   );
@@ -78,7 +78,7 @@ const initRefreshTokenEpic = (action$) =>
 const refreshTokenEpic = (action$, state$) =>
 action$.pipe(
   ofType(REFRESH_TOKEN),
-  switchMap(() => from(axios.get('http://localhost:4000/refresh_token',
+  switchMap(() => from(axios.get(`${SERVER_URL}/refresh_token`,
   {
     params: {
       refresh_token: refreshTokenSelector(state$.value)
