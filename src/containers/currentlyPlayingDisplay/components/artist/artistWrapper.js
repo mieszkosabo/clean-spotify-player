@@ -10,5 +10,5 @@ export const ArtistWrapper = styled.div`
   text-align: center;
   margin-bottom: ${theme('dims.marginBottom')};
   letter-spacing: 7.8px;
-  width: 850px;
+  width: 88.5%;
 `;

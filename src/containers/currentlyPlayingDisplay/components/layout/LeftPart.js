@@ -5,5 +5,5 @@ export const LeftPart = styled.div`
     justify-content: flex-end;
     width: 50%;
     align-items: center;
-    height: 1080px;
+    height: 100%;
 `;

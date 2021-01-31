@@ -4,8 +4,8 @@ import {prop, theme} from 'styled-tools'
 export const Container = styled.div`
     display: flex;
     justify-content: center;
-    width: 1920px;
+    width: 100vw;
     align-items: center;
-    height: 1080px;
+    height: 100vh;
     background-color: ${prop('color', theme("colors.background"))};
 `;
