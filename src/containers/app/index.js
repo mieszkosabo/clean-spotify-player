@@ -13,6 +13,7 @@ import { isNil } from "ramda";
 import { FullWrapper } from "./components/FullWrapper";
 import { LoginLink } from "./components/StyledLink";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import { FullscreenButton } from "./components/FullscreenButton/FullscreenButton";
 
 export const App = () => {
   const token = useSelector(tokenSelector);
@@ -48,7 +49,7 @@ export const App = () => {
               <LoginLink> Play something! </LoginLink>
             )}
             {token && loading && <StyledLoader />}
-            {!handle.active && <button onClick={handle.enter}>Click to go fullscreen!</button>}
+            {!handle.active && <FullscreenButton onClick={handle.enter} />}
             {token && !no_data && !loading && <CurrentlyPlayingDisplay />}
           </header>
         </div>

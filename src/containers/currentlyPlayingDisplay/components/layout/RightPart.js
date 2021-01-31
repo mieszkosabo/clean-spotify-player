@@ -6,5 +6,5 @@ export const RightPart = styled.div`
     justify-content: center;
     width: 50%;
     align-items: center;
-    height: 1080px;
+    height: 100%;
 `;

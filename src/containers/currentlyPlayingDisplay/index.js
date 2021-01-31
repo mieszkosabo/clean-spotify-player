@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Canvas } from "./components/cavas";
 import {
   songNameSelector,
@@ -8,6 +8,7 @@ import {
   durationSelector
 } from "../app/selectors";
 import { useSelector } from "react-redux";
+import useMeasure from 'react-use-measure'
 import { SongTitle } from "./components/songTitle";
 import { Artist } from "./components/artist";
 import { useTheme } from "styled-components";
@@ -26,11 +27,13 @@ export const CurrentlyPlayingDisplay = () => {
   const duration = useSelector(durationSelector);
   const theme = useTheme();
   const { data } = usePalette(albumCover);
+  const [ref, bounds] = useMeasure();
+  const canvasSize = Math.min(bounds.width / 2, bounds.height) * 0.9;
 
   return (
-    <Container color={data.darkMuted}>
+    <Container ref={ref} color={data.darkMuted}>
       <LeftPart>
-        <Canvas imgUrl={albumCover} />
+        <Canvas imgUrl={albumCover} size={canvasSize} />
       </LeftPart>
       <RightPart>
         <SongTitle title={songName} />

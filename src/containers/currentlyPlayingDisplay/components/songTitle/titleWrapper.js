@@ -11,5 +11,5 @@ export const TitleWrapper = styled.div`
   text-align: center;
   margin-bottom: ${theme('dims.marginBottom')};
   letter-spacing: 10px;
-  width: 850px;
+  width: 88.5%;
 `;
