@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { ifProp } from 'styled-tools';
 
 export const LeftPart = styled.div`
     display: flex;
-    justify-content: flex-end;
-    width: 50%;
-    align-items: center;
-    height: 100%;
+    justify-content: ${ifProp('vertical', 'center', 'flex-end')};
+    width: ${ifProp('vertical', '100%', '50%')};
+    align-items: ${ifProp('vertical', 'flex-end', 'center')};
+    height: ${ifProp('vertical', '50%', '100%')};
 `;

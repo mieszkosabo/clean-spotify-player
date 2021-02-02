@@ -14,7 +14,6 @@ import { FullWrapper } from "./components/FullWrapper";
 import { LoginLink } from "./components/StyledLink";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { FullscreenButton } from "./components/FullscreenButton/FullscreenButton";
-import { SERVER_URL } from "./consts";
 import { CONFIG } from "../../config";
 
 export const App = () => {
