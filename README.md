@@ -7,11 +7,11 @@ You can use it by simply visiting this page:
 ### features
 - fullscreen mode
 - works 24/7, it auto-refreshes Spotify's token
-- responsive for horizontal displays
+- responsive
 
 ### roadmap (PRs are welcomed!)
 - podcasts support
-- responsive for vertical displays
+- responsive for vertical displays ✅
 - ...
 ### how to run in developement mode
 1. Go to [Spotify's developer website](https://developer.spotify.com/dashboard/login) and create a new app and write down your CLIENT_ID and SECRET_ID (takes 1 minute).

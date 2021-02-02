@@ -15,6 +15,7 @@ import { LoginLink } from "./components/StyledLink";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { FullscreenButton } from "./components/FullscreenButton/FullscreenButton";
 import { CONFIG } from "../../config";
+import { GithubLink } from "./components/GithubLink/GithubLink";
 
 export const App = () => {
   const token = useSelector(tokenSelector);
@@ -43,14 +44,21 @@ export const App = () => {
           <header className="App-header">
             {!token && (
               <FullWrapper>
-              <LoginLink href={`${CONFIG.BACKEND_URL}/login`}> Log in with Spotify </LoginLink>
+                <LoginLink href={`${CONFIG.BACKEND_URL}/login`}> Log in with Spotify </LoginLink>
               </FullWrapper>
             )}
             {token && no_data && !loading && (
-              <LoginLink> Play something! </LoginLink>
+              <FullWrapper>
+                <LoginLink> Play something! </LoginLink>
+              </FullWrapper>
             )}
             {token && loading && <StyledLoader />}
-            {!handle.active && <FullscreenButton onClick={handle.enter} />}
+            {!handle.active && (
+              <>
+                <FullscreenButton onClick={handle.enter} />
+                <GithubLink onClick={() => window.open('https://github.com/mieszkosabo/clean-spotify-player')} />
+              </>
+            )}
             {token && !no_data && !loading && <CurrentlyPlayingDisplay />}
           </header>
         </div>
