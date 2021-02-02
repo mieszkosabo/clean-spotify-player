@@ -56,12 +56,12 @@ export const mainReducer = (state = initialState, action) => {
       console.log(error);
       // session expired
       if (error.status === 401) {
-        return state
-          .set("token", null)
-          .set("loading", true)
-          .set("no_data", false);
+        window.location.assign('/');
       }
-      return state;
+      return state
+        .set("token", null)
+        .set("loading", true)
+        .set("no_data", false);
     }
     case SMOOTH_PROGRESS: {
       const currTime = state.get("progress_ms");
