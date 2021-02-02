@@ -28,15 +28,18 @@ export const CurrentlyPlayingDisplay = () => {
   const theme = useTheme();
   const { data } = usePalette(albumCover);
   const [ref, bounds] = useMeasure();
-  const canvasSize = Math.min(bounds.width / 2, bounds.height) * 0.9;
+  const isVertical = bounds.width < bounds.height;
+  const canvasSize = isVertical 
+    ? Math.min(bounds.width, bounds.height / 2) * 0.8
+    : Math.min(bounds.width / 2, bounds.height) * 0.9;
 
   return (
-    <Container ref={ref} color={data.darkMuted}>
-      <LeftPart>
+    <Container ref={ref} color={data.darkMuted} vertical={isVertical}>
+      <LeftPart vertical={isVertical}>
         <Canvas imgUrl={albumCover} size={canvasSize} />
       </LeftPart>
-      <RightPart>
-        <SongTitle title={songName} />
+      <RightPart vertical={isVertical}>
+        <SongTitle title={songName} vertical={isVertical} />
 
         <ProgressLine
           percent={(progress / duration) * 100}
@@ -46,7 +49,7 @@ export const CurrentlyPlayingDisplay = () => {
           trailWidth={2}
         />
 
-        <Artist name={artist} />
+        <Artist name={artist} vertical={isVertical} />
       </RightPart>
     </Container>
   )
