@@ -4,7 +4,8 @@ import {
   FETCH_DATA_ERROR,
   SMOOTH_PROGRESS,
   SET_REFRESH_TOKEN,
-  SET_ACCESS_TOKEN
+  SET_ACCESS_TOKEN,
+  SET_LOADING
 } from "./consts";
 import { isNil } from "ramda";
 
@@ -19,12 +20,16 @@ const initialState = fromJS({
   song_name: "",
   is_playing: "Paused",
   progress_ms: 0,
-  no_data: false,
-  loading: true
+  no_data: true,
+  loading: false,
+  notPlaying: false
 });
 
 export const mainReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_LOADING: {
+      return state.set('loading', true);
+    }
     case SET_ACCESS_TOKEN: {
       const { accessToken } = action;
       return isNil(accessToken)
@@ -40,7 +45,7 @@ export const mainReducer = (state = initialState, action) => {
     case UPDATE_PLAYER_DATA: {
       const data = action.payload.response;
       return isNil(data) || isNil(data.item)
-        ? state.set("no_data", true).set("loading", false)
+        ? state.set("no_data", true).set("loading", false).set('notPlaying', true)
         : state
             .set("song_name", data.item.name)
             .set("artist", data.item.artists[0].name)
@@ -49,7 +54,8 @@ export const mainReducer = (state = initialState, action) => {
             .set("progress_ms", data.progress_ms)
             .set("album_cover", data.item.album.images[0].url)
             .set("no_data", false)
-            .set("loading", false);
+            .set("loading", false)
+            .set('notPlaying', false);
     }
     case FETCH_DATA_ERROR: {
       const error = action.payload;

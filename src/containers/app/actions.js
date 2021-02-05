@@ -6,7 +6,8 @@ import {
   SMOOTH_PROGRESS,
   SET_ACCESS_TOKEN,
   SET_REFRESH_TOKEN,
-  REFRESH_TOKEN
+  REFRESH_TOKEN,
+  SET_LOADING
 } from "./consts";
 
 export const init = () => ({
@@ -44,4 +45,8 @@ export const progressSmoothly = time => ({
 
 export const refreshTokenAction = () => ({
   type: REFRESH_TOKEN
-})
+});
+
+export const setLoading = () => ({
+    type: SET_LOADING,
+});
