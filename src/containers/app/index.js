@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { tokenSelector, noDataSelector, loadingSelector } from "./selectors";
+import { tokenSelector, noDataSelector, loadingSelector, notPlayingSelector } from "./selectors";
 import { CurrentlyPlayingDisplay } from "../currentlyPlayingDisplay";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../../theme/globalStyles";
 import { theme } from "../../theme";
 import { useDispatch } from "react-redux";
-import { setAccessToken, setRefreshToken } from "./actions";
+import { setAccessToken, setLoading, setRefreshToken } from "./actions";
 import { StyledLoader } from "./components/StyledLoader";
-import { getTokens } from "./utils";
+import { enableNoSleep, getTokens } from "./utils";
 import { isNil } from "ramda";
 import { FullWrapper } from "./components/FullWrapper";
 import { LoginLink } from "./components/StyledLink";
@@ -21,9 +21,9 @@ export const App = () => {
   const token = useSelector(tokenSelector);
   const no_data = useSelector(noDataSelector);
   const loading = useSelector(loadingSelector);
+  const notPlaying = useSelector(notPlayingSelector);
   const dispatch = useDispatch();
   const handle = useFullScreenHandle();
-
   useEffect(() => {
     if (isNil(token)) {
       const { accessToken, refreshToken } = getTokens();
@@ -42,24 +42,34 @@ export const App = () => {
         <GlobalStyle />
         <div className="App">
           <header className="App-header">
-            {!token && (
+            {!token && !loading && (
               <FullWrapper>
-                <LoginLink href={`${CONFIG.BACKEND_URL}/login`}> Log in with Spotify </LoginLink>
+                <LoginLink
+                  href={`${CONFIG.BACKEND_URL}/login`}
+                  onClick={() => {
+                    dispatch(setLoading());
+                  }}
+                  > 
+                  Log in with Spotify 
+                </LoginLink>
               </FullWrapper>
             )}
-            {token && no_data && !loading && (
+            {token && notPlaying && !loading && (
               <FullWrapper>
                 <LoginLink> Play something! </LoginLink>
               </FullWrapper>
             )}
-            {token && loading && <StyledLoader />}
+            {(no_data && loading) && <StyledLoader />}
             {!handle.active && (
               <>
-                <FullscreenButton onClick={handle.enter} />
+                <FullscreenButton onClick={() => {
+                  handle.enter();
+                  enableNoSleep();
+                }} />
                 <GithubLink onClick={() => window.open('https://github.com/mieszkosabo/clean-spotify-player')} />
               </>
             )}
-            {token && !no_data && !loading && <CurrentlyPlayingDisplay />}
+            {token && !no_data && <CurrentlyPlayingDisplay />}
           </header>
         </div>
       </ThemeProvider>

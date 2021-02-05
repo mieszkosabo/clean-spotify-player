@@ -6,6 +6,7 @@ import {
   SET_REFRESH_TOKEN,
   REFRESH_TOKEN,
   REFRESH_INTERVAL,
+  SET_ACCESS_TOKEN,
 } from "./consts";
 import { mergeMap, map, filter, catchError, takeUntil, switchMap, tap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
@@ -49,7 +50,7 @@ const smoothStatusBarEpic = (action$, state$) =>
 
 const playerDataEpic = (action$, state$) =>
   action$.pipe(
-    ofType(INIT, FETCH_DATA),
+    ofType(INIT, FETCH_DATA, SET_ACCESS_TOKEN),
     filter(() => !isNil(tokenSelector(state$.value))),
     mergeMap(() =>
       ajax({

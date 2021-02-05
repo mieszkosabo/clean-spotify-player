@@ -1,6 +1,7 @@
 
 import { isEmpty } from 'ramda';
 import { CONFIG } from '../../config';
+import NoSleep from 'nosleep.js';
 const delimiter = '__________';
 
 export const getTokens = () => {
@@ -18,3 +19,8 @@ export const getTokens = () => {
     refreshToken: decodeURIComponent(encodedRefreshToken)
   });
 }
+
+const noSleep = new NoSleep();
+export const enableNoSleep = () => {
+  noSleep.enable();
+};

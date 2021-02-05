@@ -43,3 +43,7 @@ export const loadingSelector = createSelector(getMainData, state =>
 export const artistSelector = createSelector(getMainData, state =>
   state.get("artist")
 );
+
+export const notPlayingSelector = createSelector(getMainData, state =>
+  state.get("notPlaying")
+);
