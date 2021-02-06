@@ -9,11 +9,10 @@ You can use it by simply visiting this page:
 - works 24/7, it auto-refreshes Spotify's token
 - responsive
 - prevents screen from 'sleeping' when in fullscreen mode
-
+- SPICY COLORS MODE 🔥
 ### roadmap (PRs are welcomed!)
 - podcasts support
 - choose whether playlist images should be displayed when available
-- SPICY COLORS MODE 🔥
 ### how to run in developement mode
 1. Go to [Spotify's developer website](https://developer.spotify.com/dashboard/login) and create a new app and write down your CLIENT_ID and SECRET_ID (takes 1 minute).
 2. In your Spotify project dashboard click 'edit settings' and add 'http://localhost:4000/callback' to your Redirect URIs. Then click 'save'.
