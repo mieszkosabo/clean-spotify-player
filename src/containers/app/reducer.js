@@ -5,7 +5,8 @@ import {
   SMOOTH_PROGRESS,
   SET_REFRESH_TOKEN,
   SET_ACCESS_TOKEN,
-  SET_LOADING
+  SET_LOADING,
+  SET_VIBRANT_MODE
 } from "./consts";
 import { isNil } from "ramda";
 
@@ -22,7 +23,8 @@ const initialState = fromJS({
   progress_ms: 0,
   no_data: true,
   loading: false,
-  notPlaying: false
+  notPlaying: false,
+  vibrantMode: false
 });
 
 export const mainReducer = (state = initialState, action) => {
@@ -72,6 +74,10 @@ export const mainReducer = (state = initialState, action) => {
     case SMOOTH_PROGRESS: {
       const currTime = state.get("progress_ms");
       return state.set("progress_ms", currTime + action.payload);
+    }
+    case SET_VIBRANT_MODE: {
+      const { value } = action;
+      return state.set('vibrantMode', value);
     }
     default:
       return state;
