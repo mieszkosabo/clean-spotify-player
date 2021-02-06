@@ -47,3 +47,7 @@ export const artistSelector = createSelector(getMainData, state =>
 export const notPlayingSelector = createSelector(getMainData, state =>
   state.get("notPlaying")
 );
+
+export const vibrantModeSelector = createSelector(getMainData, state =>
+  state.get("vibrantMode")
+);

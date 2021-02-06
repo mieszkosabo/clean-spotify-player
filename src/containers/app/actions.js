@@ -7,7 +7,8 @@ import {
   SET_ACCESS_TOKEN,
   SET_REFRESH_TOKEN,
   REFRESH_TOKEN,
-  SET_LOADING
+  SET_LOADING,
+  SET_VIBRANT_MODE
 } from "./consts";
 
 export const init = () => ({
@@ -49,4 +50,9 @@ export const refreshTokenAction = () => ({
 
 export const setLoading = () => ({
     type: SET_LOADING,
+});
+
+export const setVibrantMode = (value) => ({
+    type: SET_VIBRANT_MODE,
+    value
 });

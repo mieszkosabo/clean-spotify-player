@@ -19,7 +19,7 @@ import { RightPart } from "./components/layout/RightPart";
 import { LeftPart } from "./components/layout/LeftPart";
 import { Container } from "./components/layout/Container";
 
-export const CurrentlyPlayingDisplay = () => {
+export const CurrentlyPlayingDisplay = ({ vibrantMode }) => {
   const albumCover = useSelector(albumCoverSelector);
   const songName = useSelector(songNameSelector);
   const artist = useSelector(artistSelector);
@@ -34,7 +34,7 @@ export const CurrentlyPlayingDisplay = () => {
     : Math.min(bounds.width / 2, bounds.height) * 0.9;
 
   return (
-    <Container ref={ref} color={data.darkMuted} vertical={isVertical}>
+    <Container ref={ref} color={vibrantMode ? data.darkVibrant : data.darkMuted} vertical={isVertical}>
       <LeftPart vertical={isVertical}>
         <Canvas imgUrl={albumCover} size={canvasSize} />
       </LeftPart>
@@ -44,7 +44,7 @@ export const CurrentlyPlayingDisplay = () => {
         <ProgressLine
           percent={(progress / duration) * 100}
           strokeColor={defaultTo(theme.colors.progressFront, data.vibrant)}
-          trailColor={defaultTo(theme.colors.progressFront, data.darkVibrant)}
+          trailColor={defaultTo(theme.colors.progressFront, vibrantMode ? data.darkMuted : data.darkVibrant)}
           strokeWidth={2}
           trailWidth={2}
         />
