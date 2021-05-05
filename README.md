@@ -1,4 +1,8 @@
 # clean spotify player
+# ⚠️ THIS REPO IS DEPRECATED
+### I have rewriten this project from scratch with some new features. New repo can be found [here](https://github.com/mieszkosabo/next-spotify-player)!
+
+
 ![](screens/crushing.png)
 A simple app that displays basic info about your currently playing music on Spotify.
 You can use it by simply visiting this page:
